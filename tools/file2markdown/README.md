@@ -2,6 +2,13 @@
 
 把 Word、PDF、PPT、Excel 等文件转换成 Markdown（`.md`），AI 读起来更顺畅。基于 [markitdown](https://github.com/microsoft/markitdown)，打包为单文件 exe，**无需安装 Python**。
 
+## 下载
+
+exe 不随本仓库分发（超出托管平台的文件大小限制）。从下面的发布页下载 `file2markdown.zip`，解压到本目录即可：
+
+- 发布页：<https://github.com/beehive-insight/awesome-beehive-insight-tools/releases/tag/file2markdown-v0.3.0>
+- 最新版：`https://github.com/beehive-insight/awesome-beehive-insight-tools/releases/latest`（看最新的 `file2markdown-vX.Y.Z` 标签）
+
 ## 怎么用
 
 ### 双击使用（图形界面）
