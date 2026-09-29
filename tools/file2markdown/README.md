@@ -1,0 +1,72 @@
+# 文件转 Markdown（Doc2MD）
+
+把 Word、PDF、PPT、Excel 等文件转换成 Markdown（`.md`），AI 读起来更顺畅。基于 [markitdown](https://github.com/microsoft/markitdown)，打包为单文件 exe，**无需安装 Python**。
+
+## 怎么用
+
+### 双击使用（图形界面）
+
+直接双击 `文件转markdown.exe` 打开图形界面：
+
+- 可同时添加多个转换任务，排队执行；每个任务可独立开始 / 停止 / 删除
+- 每个任务可添加多个文件
+- 输出目录默认在原文件旁自动创建，也可手动选一个统一目录
+- 界面里有实时进度和日志
+
+### 命令行使用（AI 或高级用户）
+
+带参数运行则直接转换，不弹界面：
+
+```bash
+# 基本用法：转换后输出在原文件旁的 output_<文件名>/ 文件夹
+文件转markdown.exe "起诉状.docx"
+
+# 指定输出位置
+文件转markdown.exe "起诉状.docx" "知识/案件材料/某某案/起诉状.md"
+
+# 查看帮助
+文件转markdown.exe --help
+```
+
+| 参数 | 必填 | 说明 |
+| --- | --- | --- |
+| 输入文件 | 是 | 要转换的文件路径 |
+| 输出位置 | 否 | 输出文件或目录；省略时在输入同级创建 `output_<文件名>/` |
+
+> 注：exe 无控制台窗口，命令行调用时日志附加到当前终端，提示符可能不换行（按一下回车即可），不影响功能。
+
+## 输出结构
+
+```
+输入: 起诉状.docx
+输出: ./output_起诉状/
+├── 起诉状.md          # 转换结果
+└── assets/            # 自动提取的图片（仅 docx）
+    ├── image_001_xxx.png
+    └── image_002_xxx.emf
+```
+
+图片按文档中的真实顺序命名，文件名带日期戳，批量转换不会互相覆盖。
+
+## 支持的格式
+
+| 类别 | 扩展名 |
+| --- | --- |
+| Word | `.docx` |
+| PDF | `.pdf` |
+| PowerPoint | `.pptx` |
+| Excel | `.xlsx` |
+| CSV | `.csv` |
+| HTML | `.html` `.htm` |
+| 文本 | `.txt` `.md` `.json` `.jsonl` |
+| 电子书 | `.epub` |
+| Jupyter | `.ipynb` |
+| RSS/Atom | `.rss` `.atom` `.xml` |
+| ZIP | `.zip` |
+| Outlook 邮件 | `.msg` |
+
+> 注意：只支持新版 Office 格式（docx / pptx / xlsx），不支持旧版 doc / ppt / xls；仅 `.docx` 会自动提取图片。
+
+## 给 AI 的说明
+
+agent 处理「把某文件转成 md」类请求时，优先调用本工具 CLI 模式，而非逐段读文件；产出写入 `知识/` 前须按包内纪律向律师确认。
