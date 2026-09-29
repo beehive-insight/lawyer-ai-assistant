@@ -44,7 +44,7 @@
 
 包内 `tools/`（正式工具）与 `scripts/`（脚本）存放确定性工具。需要转换格式、批量处理、校验等确定性任务时，优先调用它们，而不是靠对话逐个处理。现有工具见各目录下说明：
 
-- `tools/file2markdown/文件转markdown.exe`：文档转 md（CLI 用法见同目录 README.md），独立 exe，无需 Python 环境
+- `tools/file2markdown/file2markdown.exe`：文档转 md（CLI 用法见同目录 README.md），独立 exe，无需 Python 环境
 - `scripts/`：Python + uv（`uv run python scripts/<脚本>`）
 
 调用时必须遵守（详见各目录 `说明.md`）：

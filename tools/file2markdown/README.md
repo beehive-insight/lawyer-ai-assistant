@@ -6,7 +6,7 @@
 
 ### 双击使用（图形界面）
 
-直接双击 `文件转markdown.exe` 打开图形界面：
+直接双击 `file2markdown.exe` 打开图形界面：
 
 - 可同时添加多个转换任务，排队执行；每个任务可独立开始 / 停止 / 删除
 - 每个任务可添加多个文件
@@ -19,13 +19,13 @@
 
 ```bash
 # 基本用法：转换后输出在原文件旁的 output_<文件名>/ 文件夹
-文件转markdown.exe "起诉状.docx"
+file2markdown.exe "起诉状.docx"
 
 # 指定输出位置
-文件转markdown.exe "起诉状.docx" "知识/案件材料/某某案/起诉状.md"
+file2markdown.exe "起诉状.docx" "知识/案件材料/某某案/起诉状.md"
 
 # 查看帮助
-文件转markdown.exe --help
+file2markdown.exe --help
 ```
 
 | 参数 | 必填 | 说明 |
