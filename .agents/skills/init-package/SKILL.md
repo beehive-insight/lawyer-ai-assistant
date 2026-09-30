@@ -57,6 +57,13 @@ description: Initialize the lawyer's AI assistant package for first use. Guides 
 2. 现在能做什么：举两个例子（「描述案情，我帮你找类似案例」「把乱糟糟的材料描述给我，我整理成要素表」）
 3. 想固化流程：说「帮我建个工作流」
 
+### Step 6: 表达库初始提炼（可选，仅提示）
+
+- 检查 `知识/文书库/` 是否有律师写好的成稿：
+  - **非空** → 提示律师：「你的文书库里有成稿，我可以读一遍提炼出你的写法习惯，生成表达库第一版（每条都先给你确认）。要现在做吗？」律师同意才执行：逐份读取 → 提炼候选条目（一句话 + 出处，出处注明哪份文书）→ **逐条经律师确认**后写入 `知识/表达库.md`（只追加）
+  - **为空** → 告诉律师：「以后聊到写法偏好时说『记下这个写法』，我会存进表达库」
+- 律师拒绝 → 跳过，不影响初始化完成；写盘范围仍仅限 `画像.md`（本步律师同意后增加 `知识/表达库.md`）
+
 ## Failure Strategy
 
 - 律师中途中断 → 保存已确认部分再退出，告知「下次说继续初始化即可」
@@ -64,7 +71,8 @@ description: Initialize the lawyer's AI assistant package for first use. Guides 
 
 ## Anti-Patterns
 
-- Do NOT write to any file other than `画像.md`
-- Do NOT create workflows or touch `知识/` during initialization
+- Do NOT write to any file other than `画像.md` (and `知识/表达库.md` only if the lawyer explicitly agreed to Step 6 extraction)
+- Do NOT create workflows or touch `知识/` during initialization (Step 6 表达库提炼除外，且须逐条确认)
 - Do NOT fill profile fields with inferred or fabricated content the lawyer did not say
 - Do NOT overwrite an existing filled-in profile
+- Do NOT write expression entries the lawyer did not explicitly confirm

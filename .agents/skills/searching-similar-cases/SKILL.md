@@ -63,6 +63,26 @@ Rules:
 - Avoid overly broad queries (e.g. just "民间借贷") or overly narrow (e.g. with specific names/amounts)
 - 2-3 groups, each with 2-4 keywords separated by spaces
 
+### Step 1.5: 脱敏校验（硬性前置，零命中才放行）
+
+对 Step 1 提取的**每一组将外发的检索关键词**执行扫描：
+
+1. **正则扫描**敏感信息：
+   - 人名模式：2–4 字中文姓名、「某」「某某」占位
+   - 证件 / 号码：身份证 18 位、手机号 1[3-9]\d{9}、银行卡号
+   - 金额：`\d+ 万?元`
+   - 精确日期：`yyyy-mm-dd`、`yyyy年m月d日`
+2. **命中即处理**：命中项替换为通用法律术语（如「民间借贷纠纷」）或直接从关键词剔除
+3. **对照表落输出**：最终输出必须包含脱敏前后关键词对照表，供律师核验
+
+**放行边界（三层）**：
+
+- **默认脱敏**：零命中才可拼 URL 外发；无法自动脱敏 → 向律师展示并请求人工改写。律师说「直接搜」不豁免扫描流程
+- **律师确认放行**：律师坚持带敏感词检索时，先明确提示「这会把 XX（姓名 / 金额等）作为检索词发往外部网站」，律师二次确认后执行；对照表标注「律师确认放行」及确认时间
+- **己方当事人不适用放行**：己方当事人信息即使律师要求也一律脱敏（保密义务底线）。检索**对方当事人**公开涉诉记录属正常业务：律师标注为主体为对方 / 公开主体，经确认可保留真名
+
+WebSearch 兜底路径同样过本步骤（兜底关键词同一套扫描）。
+
 ### Step 2: Check Login State
 
 Before searching, verify the browser is logged into rmfyalk:
@@ -184,4 +204,6 @@ Render as Markdown cards:
 - Do NOT fabricate case numbers — all case numbers must come from rmfyalk results
 - Do NOT invent referee gist — only use text extracted from rmfyalk pages
 - Do NOT mark laws as "verified" unless they were extracted from rmfyalk detail pages
-- Do NOT search with specific names, amounts, or dates — use legal terms only
+- Do NOT send any keyword group outward (rmfyalk URL or WebSearch) without passing Step 1.5 desensitization scan — "直接搜" does not bypass the scan
+- Do NOT send 己方当事人 (client-side party) names/amounts/IDs outward even if the lawyer requests it; 对方/公开主体 may be retained only after lawyer labels and confirms
+- Do NOT skip the desensitization before/after comparison table in the final output

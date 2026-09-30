@@ -21,8 +21,11 @@
 | 建工作流 | `.agents/skills/create-workflow/` |
 | 类案检索 | `.agents/skills/searching-similar-cases/` |
 | 案件要素整理 | `.agents/skills/organizing-case-elements/` |
+| 记下这个写法 | `.agents/skills/save-to-expression/` |
+| 存办案笔记 | `.agents/skills/save-case-note/` |
 
 - 工作流等律师写的内容里只出现中文能力名，由你按本表解析到对应 Skill。
+- 律师只说「存一下」等模糊请求时，两个存档 Skill 均不擅自命中：先反问「想存表达偏好（记下这个写法）还是办案笔记（存办案笔记）」，明确后再路由。
 
 ## 4. 知识使用
 
@@ -56,5 +59,6 @@
 
 ## 8. 草稿规则
 
+- **写草稿前先读 `知识/表达库.md`（若存在）**，按这位律师的写法和说话习惯起草；文件不存在则跳过，不报错。
 - 所有法律意见、文书、客户回复，输出物头部标注「**AI 草稿，待律师确认**」。
 - 涉及法条 / 案例引用的输出物，结尾附：「以上法律依据请律师核验后再使用」。
